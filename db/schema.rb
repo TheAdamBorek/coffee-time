@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_224908) do
+ActiveRecord::Schema.define(version: 2018_11_27_102153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "entries", force: :cascade do |t|
-    t.string "last_entry_date"
-    t.string "datetime"
+  create_table "slack_notifications", force: :cascade do |t|
+    t.datetime "last_notification_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,8 @@
+development:
+  slack_hook_url: "https://webhook.com/development"
+
+test:
+  slack_hook_url: "https://webhook.com/test"
+
+production:
+  slack_hook_url: <%= ENV["slack_hook_url"] %>
