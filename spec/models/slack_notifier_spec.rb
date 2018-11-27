@@ -7,14 +7,12 @@ describe 'Slack Notifier' do
 
   shared_examples_for "should_notify_slack" do
     before do
+      ActiveJob::Base.queue_adapter = :test
       allow(http).to receive(:post)
     end
 
     it 'should notify slack about notification' do
-      request = SlackNotificationRequest.new("http://link_to_join.com")
-      expect(http).to receive(:post)
-                          .with(request)
-      subject
+      expect { subject }.to have_enqueued_job(NotifySlackJob)
     end
 
     it 'should update last notification date' do

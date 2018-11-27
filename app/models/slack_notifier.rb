@@ -1,5 +1,3 @@
-require 'rails'
-
 class SlackNotifier
   def initialize(link_to_join, http = HttpClient.new)
     @http = http
@@ -8,7 +6,7 @@ class SlackNotifier
 
   def did_enter_hangouts
     notification = SlackNotification.last
-    if notified? notification, in_last: 1.hours
+    unless notified? notification, in_last: 1.hours
       update_entry_date_of notification
       notify_slack
     end
@@ -22,11 +20,10 @@ class SlackNotifier
   end
 
   def notified?(notification, in_last:)
-    notification.last_notification_date < Time.now - in_last
+    notification.last_notification_date >= Time.now - in_last
   end
 
   def notify_slack
-    request = SlackNotificationRequest.new(@link_to_join)
-    @http.post(request)
+    NotifySlackJob.perform_later
   end
 end

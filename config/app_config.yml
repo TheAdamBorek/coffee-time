@@ -1,5 +1,5 @@
 development:
-  #slack_hook_url: <%= ENV["SLACK_HOOK_URL"] %>
+  #slack_hook_url in ENV
   hangouts_redirection_url: "https://hangouts.google.com/call/sEYjJ1cpc3dPStmRl8gqAEEI"
 
 test:
