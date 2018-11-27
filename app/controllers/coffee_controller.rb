@@ -10,6 +10,6 @@ class CoffeeController < ApplicationController
 
   private
   def prepare_observers
-    @observers = [SlackNotifier.new]
+    @observers = [SlackNotifier.new(root_url)]
   end
 end

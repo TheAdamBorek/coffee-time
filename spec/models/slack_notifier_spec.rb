@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Slack Notifier' do
   let(:http) { double }
-  let(:sut) { SlackNotifier.new(http) }
+  let(:sut) { SlackNotifier.new("http://link_to_join.com", http) }
   subject { sut.did_enter_hangouts }
 
   shared_examples_for "should_notify_slack" do
@@ -11,8 +11,9 @@ describe 'Slack Notifier' do
     end
 
     it 'should notify slack about notification' do
+      request = SlackNotificationRequest.new("http://link_to_join.com")
       expect(http).to receive(:post)
-                          .with('https://webhook.com/test',{body: {text: "The message"}})
+                          .with(request)
       subject
     end
 

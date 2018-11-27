@@ -12,7 +12,11 @@ class AppConfig
   end
 
   def slack_hook_url
-    @config['slack_hook_url']
+    url = @config['slack_hook_url']
+    if url.blank?
+      url = ENV['SLACK_HOOK_URL']
+    end
+    URI(url)
   end
 
   def hangouts_redirect_url
