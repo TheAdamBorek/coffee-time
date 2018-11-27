@@ -1,29 +1,29 @@
 class SlackNotifier
-  def initialize(link_to_join, http = HttpClient.new)
-    @http = http
-    @link_to_join = link_to_join
+  def initialize(root_url)
+    @root_url = root_url
   end
 
   def did_enter_hangouts
-    notification = SlackNotification.last
-    unless notified? notification, in_last: 1.hours
-      update_entry_date_of notification
+    @notification = SlackNotification.last
+    unless notified_in_last? 1.hours
+      update_last_notification_date
       notify_slack
     end
   end
 
   private
 
-  def update_entry_date_of(entry)
-    entry.last_notification_date = DateTime.now
-    entry.save
+  def update_last_notification_date
+    @notification.last_notification_date = DateTime.now
+    @notification.save
   end
 
-  def notified?(notification, in_last:)
-    notification.last_notification_date >= Time.now - in_last
+  def notified_in_last?(time_ago)
+    return false
+    @notification.last_notification_date >= Time.now - time_ago
   end
 
   def notify_slack
-    NotifySlackJob.perform_later
+    NotifySlackJob.perform_later @root_url
   end
 end

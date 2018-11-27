@@ -15,6 +15,7 @@ class SlackNotificationRequest
   end
 
   def body
+    return {text: "testing #{link_to_join}/testing"}
     {text: "Hey! Someone wants to drink some coffee together! Everyone is invited! #{link_to_join}"}
   end
 
