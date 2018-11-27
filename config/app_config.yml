@@ -1,8 +1,11 @@
 development:
   slack_hook_url: "https://webhook.com/development"
+  hangouts_redirection_url: "https://hangouts.google.com/call/sEYjJ1cpc3dPStmRl8gqAEEI"
 
 test:
   slack_hook_url: "https://webhook.com/test"
+  hangouts_redirection_url: "https://tests.com/config_redirect"
 
 production:
   slack_hook_url: <%= ENV["slack_hook_url"] %>
+  hangouts_redirection_url: "https://hangouts.google.com/call/sEYjJ1cpc3dPStmRl8gqAEEI"

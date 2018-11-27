@@ -11,7 +11,7 @@ RSpec.describe CoffeeController, type: :controller do
 
     subject { get :show }
     it 'redirects to hangouts link' do
-      expect(subject).to redirect_to 'https://hangouts.google.com/call/sEYjJ1cpc3dPStmRl8gqAEEI'
+      expect(subject).to redirect_to 'https://tests.com/config_redirect'
     end
 
     it 'notifies observers about entry' do

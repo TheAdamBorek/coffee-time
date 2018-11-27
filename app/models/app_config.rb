@@ -14,4 +14,8 @@ class AppConfig
   def slack_hook_url
     @config['slack_hook_url']
   end
+
+  def hangouts_redirect_url
+    @config['hangouts_redirection_url']
+  end
 end
