@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'coffee#show'
+  get 'join', to: 'coffee#show', as: 'join_coffee'
 end
