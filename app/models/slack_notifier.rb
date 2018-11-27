@@ -19,7 +19,6 @@ class SlackNotifier
   end
 
   def notified_in_last?(time_ago)
-    return false
     @notification.last_notification_date >= Time.now - time_ago
   end
 
