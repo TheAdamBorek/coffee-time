@@ -15,7 +15,7 @@ class SlackNotificationRequest
   end
 
   def body
-    {text: "Hey! Someone wants to drink some coffee together! Everyone is invited! #{link_to_join}"}
+    {text: "<!here> Hey! Someone has just enter the coffee link. Don't let him drink coffee alone! Join now #{link_to_join}"}
   end
 
   def ==(other)
