@@ -1,6 +1,6 @@
 development:
   #slack_hook_url in ENV
-  hangouts_redirection_url: "https://hangouts.google.com/call/sEYjJ1cpc3dPStmRl8gqAEEI"
+  hangouts_redirection_url: "https://hangouts.google.com/call/pP-NIf4xLGPCAGE_rtKnAEEI"
 
 test:
   slack_hook_url: "https://webhook.com/test"
@@ -8,4 +8,4 @@ test:
 
 production:
   #slack_hook_url in ENV
-  hangouts_redirection_url: "https://hangouts.google.com/call/sEYjJ1cpc3dPStmRl8gqAEEI"
+  hangouts_redirection_url: "https://hangouts.google.com/call/pP-NIf4xLGPCAGE_rtKnAEEI"
