@@ -1,31 +1,60 @@
 require 'rails_helper'
 
 RSpec.describe VideoCallsController, type: :controller do
-  it 'should permit only call_link in params' do
+  it 'should permit only text in params' do
     params = {
-        call_link: "https://call_link.com",
+        text: "http://link.com",
         param_to_be_refused: "param_to_refuse"
     }
-    should permit(:call_link).for(:update, params: params)
+    should permit(:text).for(:update_link, params: params, verb: :post)
   end
 
   shared_examples('should_update_call_link') do
-    it 'should updates the call_link' do
-      create :video_call
-      subject
-      expect(VideoCall.last.link).to eq(params[:call_link])
-    end
+
   end
 
   context 'when link is empty' do
-    let(:params) { {} }
-    subject { put :update, params: {} }
-    it_behaves_like 'should_update_call_link'
+    subject { post :update_link, params: {} }
+    it 'should not updates the link' do
+      create :video_call
+      link = VideoCall.last.link
+      subject
+      expect(VideoCall.last.link).to eq(link)
+    end
   end
 
-  context 'when link is valid' do
-    let(:params) { {call_link: "https://call_link.com"} }
-    subject { put :update, params: params }
-    it_behaves_like 'should_update_call_link'
+  context 'when link is in params' do
+    it 'response has a 200 OK status code' do
+      subject
+      expect(response).to have_http_status :ok
+    end
+
+    subject { post :update_link, params: {text: "http://link.com"} }
+    it 'should updates the link' do
+      create :video_call
+      subject
+      expect(VideoCall.last.link).to eq("http://link.com")
+    end
+
+    it 'render a response' do
+      subject
+      json = JSON.parse(response.body)
+      expect(json['text']).to eq("I've changed the link to http://link.com")
+    end
+  end
+
+  context 'when link is not an URI' do
+    subject { post :update_link, params: {text: "not_valid"} }
+    it 'should not update the link' do
+      subject
+      expect(VideoCall.instance.link).to_not eq("not_valid")
+    end
+
+    it 'should render an error' do
+      subject
+      json = JSON.parse(response.body)
+      expect(json["text"]).to eq "Given text is not an URL"
+      expect(response).to have_http_status :bad_request
+    end
   end
 end

@@ -1,10 +1,20 @@
 class VideoCallsController < ApplicationController
-  def update
+  rescue_from Coffee::NotURLFormatError, with: :render_wrong_url_format
+
+  def update_link
     params = update_params
-    VideoCall.update_link(params[:call_link])
+    link = params[:text]
+    VideoCall.update_link(link)
+    render json: {'text': "I've changed the link to #{link}"}, status: :ok
   end
 
+  private
+
   def update_params
-    params.permit(:call_link)
+    params.permit(:text)
+  end
+
+  def render_wrong_url_format
+    render json: {'text': "Given text is not an URL"}, status: :bad_request
   end
 end
