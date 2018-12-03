@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :video_call do
-    link { "MyString" }
+    link { "https://link-factorybot.com" }
     string { "MyString" }
   end
 end
