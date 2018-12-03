@@ -39,7 +39,8 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
 end
 
