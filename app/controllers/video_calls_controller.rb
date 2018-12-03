@@ -1,0 +1,2 @@
+class VideoCallsController < ApplicationController
+end

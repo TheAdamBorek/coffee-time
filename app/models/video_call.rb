@@ -1,0 +1,2 @@
+class VideoCall < ApplicationRecord
+end
